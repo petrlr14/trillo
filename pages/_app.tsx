@@ -3,6 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+import { Toaster } from 'react-hot-toast';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -17,8 +18,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <>
       <Head>
-        <script src="https://kit.fontawesome.com/248332ce05.js" />
+        <script
+          src="https://kit.fontawesome.com/248332ce05.js"
+          crossOrigin="anonymous"
+        />
       </Head>
+      <div>
+        <Toaster position="top-right" />
+      </div>
       <Component {...pageProps} />
     </>
   );

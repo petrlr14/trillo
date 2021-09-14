@@ -1,8 +1,21 @@
+import { Provider } from '@supabase/gotrue-js';
 import { supabase } from './supabaseClient';
 
-const signInWithGoogle = async () => {
+export const signIn = async (email: string, password: string) => {
+  try {
+    const { user, session, error } = await supabase.auth.signIn({
+      email,
+      password,
+    });
+    if (error) throw error;
+  } catch (e) {
+    throw e;
+  }
+};
+
+const signInWithProvider = async (provider: Provider) => {
   const { user, session, error } = await supabase.auth.signIn({
-    provider: 'google',
+    provider: provider,
   });
   console.log(user, session, error);
 };
@@ -14,4 +27,4 @@ export const signOut = async () => {
 
 export const user = supabase.auth.user();
 
-export default signInWithGoogle;
+export default signInWithProvider;
