@@ -1,7 +1,9 @@
-import Head from 'next/head';
 import { ReactElement } from 'react';
+import Head from 'next/head';
 import Layout from '../components/common/Layout';
 import Heart from '../components/icons/Heart';
+import {} from '@supabase/supabase-js';
+import { user } from '../utils/supabaseAuth';
 
 export default function Home() {
   return (
