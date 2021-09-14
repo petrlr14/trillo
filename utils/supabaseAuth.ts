@@ -1,7 +1,24 @@
 import { Provider } from '@supabase/gotrue-js';
 import { supabase } from './supabaseClient';
 
-export const signIn = async (email: string, password: string) => {
+interface Credentials {
+  email: string;
+  password: string;
+}
+
+export const signUp = async ({ email, password }: Credentials) => {
+  try {
+    const { user, session, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) throw error;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const signIn = async ({ email, password }: Credentials) => {
   try {
     const { user, session, error } = await supabase.auth.signIn({
       email,
@@ -13,10 +30,13 @@ export const signIn = async (email: string, password: string) => {
   }
 };
 
-const signInWithProvider = async (provider: Provider) => {
-  const { user, session, error } = await supabase.auth.signIn({
-    provider: provider,
-  });
+export const signInWithProvider = async (provider: Provider) => {
+  const { user, session, error } = await supabase.auth.signIn(
+    {
+      provider: provider,
+    },
+    { redirectTo: '/dashboard' }
+  );
   console.log(user, session, error);
 };
 
@@ -25,6 +45,6 @@ export const signOut = async () => {
   console.log(error);
 };
 
-export const user = supabase.auth.user();
+export const getSession = supabase.auth.session();
 
-export default signInWithProvider;
+export const getUser = supabase.auth.user();

@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Layout from '../components/common/Layout';
 import Heart from '../components/icons/Heart';
 import {} from '@supabase/supabase-js';
-import { user } from '../utils/supabaseAuth';
+import { GetServerSideProps } from 'next';
+import { basePath } from '../utils/constants';
 
 export default function Home() {
   return (
@@ -40,4 +41,23 @@ export default function Home() {
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await fetch(`${basePath}/api/getUser`, {
+    headers: {
+      token: context.req.cookies.token as string,
+    },
+  }).then((res) => res.json());
+  /* if (response) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/dashboard',
+      },
+    };
+  } */
+  return {
+    props: {},
+  };
 };

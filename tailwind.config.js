@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      zIndex: {
+        '-10': '-10',
+      },
       colors: {
         "brand": {
           'violet': "#EAE6FF",
