@@ -2,12 +2,12 @@ import { GetServerSideProps } from 'next';
 import { ReactElement, SyntheticEvent, useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import Logo from '../../components/common/Logo';
-import Input from '../../components/ui/Input';
-import { signUp } from '../../utils/supabaseAuth';
-import { supabase } from '../../utils/supabaseClient';
 import toast from 'react-hot-toast';
-import AuthLayout from '../../components/common/AuthLayout';
+import Input from '@components/ui/Input';
+import Logo from '@components/common/Logo';
+import AuthLayout from '@components/common/Layout/AuthLayout';
+import { signUp } from '@utils/supabaseAuth';
+import { supabase } from '@utils/supabaseClient';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');

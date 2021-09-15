@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
-import Layout from '../components/common/Layout';
-import Head from 'next/head';
 import { GetServerSideProps } from 'next';
-import { supabase } from '../utils/supabaseClient';
+import Head from 'next/head';
+import Layout from '@components/common/Layout/Layout';
+import { supabase } from '@utils/supabaseClient';
 
 const Dashboard = () => {
   return (

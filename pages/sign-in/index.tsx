@@ -1,17 +1,17 @@
 import Link from 'next/link';
 import Head from 'next/head';
-import Logo from '../../components/common/Logo';
-import Button from '../../components/ui/Buttons';
-import Input from '../../components/ui/Input';
-import { signIn, signInWithProvider } from '../../utils/supabaseAuth';
 import { ReactElement, useState } from 'react';
 import toast from 'react-hot-toast';
-import AuthLayout from '../../components/common/AuthLayout';
-import Google from '../../components/icons/Google';
-import Twitter from '../../components/icons/Twitter';
-import Github from '../../components/icons/Github';
 import { GetServerSideProps } from 'next';
-import { supabase } from '../../utils/supabaseClient';
+import { signIn, signInWithProvider } from '@utils/supabaseAuth';
+import Logo from '@components/common/Logo';
+import Input from '@components/ui/Input';
+import Button from '@components/ui/Buttons';
+import Google from '@components/icons/Google';
+import Twitter from '@components/icons/Twitter';
+import Github from '@components/icons/Github';
+import AuthLayout from '@components/common/Layout/AuthLayout';
+import { supabase } from '@utils/supabaseClient';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

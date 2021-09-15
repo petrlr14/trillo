@@ -3,7 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider } from '@context/AuthContext';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

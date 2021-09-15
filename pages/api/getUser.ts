@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { supabase } from '../../utils/supabaseClient';
+import { supabase } from '@utils/supabaseClient';
 
 const getUser = async (req: NextApiRequest, res: NextApiResponse) => {
   const user = await supabase.auth.api.getUser(req.headers.token as string);
