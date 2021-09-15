@@ -1,14 +1,13 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext } from 'react';
 import Link from 'next/link';
-import Logo from './Logo';
-import Button, { ButtonLink } from '../ui/Buttons';
-import { signOut, getUser, getSession } from '../../utils/supabaseAuth';
-import { supabase } from '../../utils/supabaseClient';
-import { AuthContext } from '../../context/AuthContext';
-import Logout from '../icons/Logout';
+import { AuthContext } from '@context/AuthContext';
+import Logo from '@components/common/Logo';
+import Button, { ButtonLink } from '@components/ui/Buttons';
+import { signOut } from '@utils/supabaseAuth';
+import Logout from '@components/icons/Logout';
 
 const Layout: FC = (props) => {
-  const { user, session } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="flex flex-col w-full h-screen min-h-screen bg-gradient-to-b from-brand-violet to-white">
@@ -35,7 +34,7 @@ const Layout: FC = (props) => {
             <Button
               className="text-red-600"
               onClick={async () => {
-                await supabase.auth.signOut();
+                signOut();
               }}
             >
               <Logout />
