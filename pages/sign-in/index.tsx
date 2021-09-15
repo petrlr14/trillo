@@ -1,9 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGithub,
-  faGoogle,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 import Head from 'next/head';
 import Logo from '../../components/common/Logo';
@@ -13,6 +7,11 @@ import { signIn, signInWithProvider } from '../../utils/supabaseAuth';
 import { ReactElement, useState } from 'react';
 import toast from 'react-hot-toast';
 import AuthLayout from '../../components/common/AuthLayout';
+import Google from '../../components/icons/Google';
+import Twitter from '../../components/icons/Twitter';
+import Github from '../../components/icons/Github';
+import { GetServerSideProps } from 'next';
+import { supabase } from '../../utils/supabaseClient';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -76,7 +75,7 @@ const SignIn = () => {
                 signInWithProvider('google');
               }}
             >
-              <FontAwesomeIcon icon={faGoogle} className="text-2xl" />
+              <Google />
             </Button>
             <Button
               buttonType="ghost"
@@ -85,7 +84,7 @@ const SignIn = () => {
                 signInWithProvider('twitter');
               }}
             >
-              <FontAwesomeIcon icon={faTwitter} className="text-2xl" />
+              <Twitter />
             </Button>
             <Button
               buttonType="ghost"
@@ -94,7 +93,7 @@ const SignIn = () => {
                 signInWithProvider('github');
               }}
             >
-              <FontAwesomeIcon icon={faGithub} className="text-2xl" />
+              <Github />
             </Button>
           </div>
           <Link href="/sign-up">
@@ -110,6 +109,21 @@ const SignIn = () => {
 
 SignIn.getLayout = function getLayout(page: ReactElement) {
   return <AuthLayout>{page}</AuthLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { user } = await supabase.auth.api.getUserByCookie(context.req);
+  if (user) {
+    return {
+      props: {},
+      redirect: {
+        destination: '/dashboard',
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default SignIn;

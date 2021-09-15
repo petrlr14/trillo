@@ -1,15 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { ReactElement, SyntheticEvent, useState } from 'react';
-import {
-  faGithub,
-  faGoogle,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 import Head from 'next/head';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from '../../components/common/Logo';
-import Button from '../../components/ui/Buttons';
 import Input from '../../components/ui/Input';
 import { signUp } from '../../utils/supabaseAuth';
 import { supabase } from '../../utils/supabaseClient';
@@ -86,7 +79,6 @@ SignUp.getLayout = function getLayout(page: ReactElement) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { user } = await supabase.auth.api.getUserByCookie(context.req);
-  console.log(user);
   if (user) {
     return {
       props: {},

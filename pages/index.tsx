@@ -5,6 +5,7 @@ import Heart from '../components/icons/Heart';
 import {} from '@supabase/supabase-js';
 import { GetServerSideProps } from 'next';
 import { basePath } from '../utils/constants';
+import { supabase } from '../utils/supabaseClient';
 
 export default function Home() {
   return (
@@ -44,19 +45,18 @@ Home.getLayout = function getLayout(page: ReactElement) {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await fetch(`${basePath}/api/getUser`, {
-    headers: {
-      token: context.req.cookies.token as string,
-    },
-  }).then((res) => res.json());
-  /* if (response) {
+  const { data, error, user } = await supabase.auth.api.getUserByCookie(
+    context.req
+  );
+  if (user) {
     return {
       props: {},
       redirect: {
         destination: '/dashboard',
+        permanent: false,
       },
     };
-  } */
+  }
   return {
     props: {},
   };

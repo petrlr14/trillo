@@ -37,7 +37,6 @@ export const signInWithProvider = async (provider: Provider) => {
     },
     { redirectTo: '/dashboard' }
   );
-  console.log(user, session, error);
 };
 
 export const signOut = async () => {
