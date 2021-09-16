@@ -71,8 +71,8 @@ const DashboardLayout: FC = (props) => {
   );
 };
 
-export function getDashboardLayout(page: ReactElement) {
+export const getDashboardLayout = (page: ReactElement) => {
   return <DashboardLayout>{page}</DashboardLayout>;
-}
+};
 
 export default DashboardLayout;

@@ -1,6 +1,8 @@
 import '../styles/globals.css';
+import 'nprogress/nprogress.css';
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import { AppProps } from 'next/app';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from '@context/AuthContext';
@@ -15,6 +17,10 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const TopProgress = dynamic(() => import('@components/common/Progress'), {
+  ssr: false,
+});
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
@@ -24,6 +30,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           <CreateBoard />
           <Toaster position="top-right" />
         </div>
+        <TopProgress />
         {getLayout(<Component {...pageProps} />)}
       </CreateBoardProvider>
     </AuthProvider>
