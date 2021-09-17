@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { supabase } from '@utils/supabaseClient';
 import { BoardType } from 'services/Boards';
 import { getDashboardLayout } from '@components/common/Layout/DashboardLayout';
+import Header from '@components/common/Layout/Header';
 
 interface BoardSlugProps {
   board: BoardType;
@@ -14,14 +15,17 @@ const BoardSlug = ({ board }: BoardSlugProps) => {
       <Head>
         <title>{board.name}</title>
       </Head>
-      <main
-        className="w-full h-screen"
+      <div
+        className="flex flex-col w-full h-screen min-h-screen"
         style={{
           backgroundImage: `url(${board.wallpaper})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
         }}
-      ></main>
+      >
+        <Header bgColor="bg-[#00000052]" />
+        <main className="w-full h-full"></main>
+      </div>
     </>
   );
 };

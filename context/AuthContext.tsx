@@ -27,7 +27,9 @@ export const AuthProvider: FC = (props) => {
         if (event === 'SIGNED_OUT') {
           router.replace('/');
         }
-        console.log(event);
+        if (event === 'SIGNED_IN') {
+          router.replace('/dashboard');
+        }
         setSession(newSession);
         setUser(newSession?.user);
         await fetch('/api/auth', {
