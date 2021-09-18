@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { supabase } from '@utils/supabaseClient';
 import { BoardType } from 'services/Boards';
 import Header from '@components/common/Layout/Header';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useEffect, useState } from 'react';
 import Column from '@components/common/Column';
 import { getAllListFromBoard, BoardListType } from 'services/List';
@@ -54,11 +54,11 @@ const BoardSlug = ({ board, lists }: BoardSlugProps) => {
         }}
       >
         <Header bgColor="bg-[#00000052]" />
-        <main className="relative w-full max-w-full h-full overflow-x-auto">
+        <main className="relative w-full max-w-full h-full flex-auto">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="w-full absolute top-0 left-0 flex p-2 gap-2">
-              {_lists.map((list) => {
-                return <Column key={list.id} list={list} />;
+            <div className="absolute inset-0 p-2 gap-2 w-full h-full max-h-full flex overflow-x-auto">
+              {_lists.map((list, index) => {
+                return <Column list={list} key={`list-${list.id}`} />;
               })}
               <AddList boardId={board.id} />
             </div>
