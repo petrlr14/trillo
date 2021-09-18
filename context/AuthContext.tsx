@@ -42,8 +42,12 @@ export const AuthProvider: FC = (props) => {
         });
       }
     );
+
     return () => data?.unsubscribe();
   }, []);
+
+  console.log(user);
+
   return (
     <AuthContext.Provider value={{ session, user }}>
       {props.children}
